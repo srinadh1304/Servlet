@@ -23,9 +23,11 @@ public class LoginServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          String user = req.getParameter("user");
         String pwd = req.getParameter("pwd");
+        String name=req.getParameter("name");
         String userID = getServletConfig().getInitParameter("user");
         String password = getServletConfig().getInitParameter("password");
-        if(userID.equals(user) && password.equals(pwd)) {
+        String nameRegex = "^[A-Z][a-z]{2,}";
+        if(userID.equals(user) && password.equals(pwd) && name.matches(nameRegex) ) {
             req.setAttribute("user",user);
             req.getRequestDispatcher("LoginSuccess.jsp").forward(req, resp);
         } else {
